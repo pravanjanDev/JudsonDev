@@ -13,9 +13,19 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 	
+	<context-param>
+    <param-name>applicationContext</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+</context-param>
+
+<listener>
+   <listener-class>
+        org.springframework.web.context.ContextLoaderListener
+   </listener-class>
+</listener> 
 	
 	<welcome-file-list>
-		<welcome-file>judsonImage.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 	
 </web-app>

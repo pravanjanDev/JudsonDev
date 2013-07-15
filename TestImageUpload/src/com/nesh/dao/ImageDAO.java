@@ -205,18 +205,9 @@ public class ImageDAO {
 		HashMap<String ,Object > imageMap = new HashMap<String , Object>();
 		String cursorStringSonglist =null;
 		String paginationLimit = "";
-		paginationLimit = request.getParameter("paginationLimit");
-		cursorStringSonglist = (String) request.getSession().getAttribute("cursorStringSonglist");
-		System.out.println("The CURSOR VALUE "+cursorStringSonglist);
-		try {
-			if(cursorStringSonglist==null){
-				cursorStringSonglist="null";
-				//cursorStringSonglist = request.getParameter("cursorStringSonglist");
-				imageMap  = getpendingImagewithPeginatino(request ,cursorStringSonglist,paginationLimit);
-			}
-			else{
-				imageMap  = getpendingImagewithPeginatino(request ,cursorStringSonglist,paginationLimit);
-			}
+		try{
+			imageMap  = getpendingImagewithPeginatino(request );
+			
 		}
 		catch(Exception e){
 			StringWriter sw = new StringWriter();
@@ -228,7 +219,7 @@ public class ImageDAO {
 	
 	}
 	
-	private HashMap<String, Object> getpendingImagewithPeginatino(HttpServletRequest request ,String cursorStringSonglist,String paginationLimit) {
+	private HashMap<String, Object> getpendingImagewithPeginatino(HttpServletRequest request ) {
 		Query query1 = null;
 		Cursor cursor=null;
 		
@@ -239,27 +230,12 @@ public class ImageDAO {
  
 		try {
 			Query queryPendingImage = pm.newQuery(ImageJDO.class," status == '" + status.trim()+ "'");
-			if(paginationLimit =="" || paginationLimit == null){
-				System.out.println("coming inside if ");
-				queryPendingImage.setRange(0, Integer.parseInt("20"));
-			}
-			else{
-				queryPendingImage.setRange(0, Integer.parseInt(paginationLimit));
-			}
 			
-			if(!cursorStringSonglist.equalsIgnoreCase("null")){
-				System.out.println("inside if cursor having value having query value is::::");
-				cursor = Cursor.fromWebSafeString(cursorStringSonglist);
-				Map<String, Object> extensionMap = new HashMap<String, Object>();
-				extensionMap.put(JDOCursorHelper.CURSOR_EXTENSION, cursor);
-				queryPendingImage.setExtensions(extensionMap);
-			}
+				
 			List songList = (List<ImageJDO>) queryPendingImage.execute();
 			System.out.println("Song list size is "+songList);
 			ArrayList<ImageJDO> tempImageList = (ArrayList<ImageJDO>) pm.detachCopyAll(songList);
-			cursor = JDOCursorHelper.getCursor(songList);
-			System.out.println("The cursor value is "+cursor);
-			cursorStringSonglist = cursor.toWebSafeString();
+			
 			if(tempImageList.size()> 0 && tempImageList!=null){
 				for(int playIndex=0 ;playIndex <tempImageList.size() ;playIndex ++){
 					ImageJDO imageJDO = tempImageList.get(playIndex);
@@ -267,17 +243,10 @@ public class ImageDAO {
 					imageJDO.setUrl(url);
 					imageMap.put(imageJDO.getImageId(),imageJDO );
 				}
-				System.out.println("The CURSOR VALUE "+cursorStringSonglist);
-				request.getSession().setAttribute("cursorStringSonglist", cursorStringSonglist);
-				System.out.println((String) request.getSession().getAttribute("cursorStringSonglist"));
-			}
-			if(imageMap.size() <= 0){
-				System.out.println("Comming inside pending");
-				cursorStringSonglist="null";
-				request.getSession().setAttribute("cursorStringSonglist", cursorStringSonglist);
-				imageMap.put("success", false);
+				
 				
 			}
+			
 		}
 		catch(Exception e){
 			StringWriter sw = new StringWriter();
@@ -380,10 +349,13 @@ public class ImageDAO {
 	public String  updateStatus(HttpServletRequest request,
 			HttpServletResponse response) {
 		String responseString = null;
+		System.out.println(request.getParameter("imageIdhere").trim());
+		String imageId =request.getParameter("imageIdhere").trim();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try{
-			Query getImageJDO= pm.newQuery(ImageJDO.class, " imageId == '" +request.getParameter("imageIdhere").trim()+ "'");
+			Query getImageJDO= pm.newQuery(ImageJDO.class, " imageId == '" +imageId+ "'");
 			List<ImageJDO> listImageJDO = (List<ImageJDO>) getImageJDO .execute();
+			System.out.println("The length of the list"+listImageJDO.size());
 			if(listImageJDO.size() > 0){
 				ImageJDO imageJDO = listImageJDO.get(0);
 				if(imageJDO.getStatus().equalsIgnoreCase("pending")){
@@ -400,6 +372,9 @@ public class ImageDAO {
 		}
 		catch(Exception e){
 			e.printStackTrace();
+		}
+		finally{
+			pm.close();
 		}
 		return responseString;
 	}

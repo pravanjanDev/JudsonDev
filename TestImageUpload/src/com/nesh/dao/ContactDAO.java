@@ -56,13 +56,14 @@ public class ContactDAO {
 		return resultMap;
 	}
 	
-	public HashMap<String,String> getContact(String email) {
-		HashMap<String ,String> resultMap = new   HashMap<String,String> ();
+	public HashMap<String,Object> getContact(String email,String password) {
+		HashMap<String ,Object> resultMap = new   HashMap<String,Object> ();
 		try{
+			
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		    
-	        Query getContactJDO= pm.newQuery(ContactJDO.class, " userEmail == '" +email+ "'");
+	        Query getContactJDO= pm.newQuery(ContactJDO.class, " userEmail == '" +email+ "' && userPassword=='"+password+"'");
 	 	    System.out.println("query " + getContactJDO);
 	 	    List<ContactJDO> listContactJDO = (List<ContactJDO>) getContactJDO .execute();
 	 	    if(listContactJDO.size() > 0){
@@ -70,9 +71,11 @@ public class ContactDAO {
 	 	    	resultMap.put("FirstName", listContactJDO.get(0).getUserFirstName());
 	 	    	resultMap.put("LastName", listContactJDO.get(0).getUserLastName());
 	 	    	resultMap.put("ContactId", listContactJDO.get(0).getUserId());
+	 	    	resultMap.put("flag",true);
 	 	    }
 	 	    else{
-	 	    	resultMap.put("Response","Email id not exist in the contact list");
+	 	    	resultMap.put("Response","We have not found your email id");
+	 	    	resultMap.put("flag",false);
 
 	 	    }
 		}
@@ -81,6 +84,7 @@ public class ContactDAO {
 		}
 		return resultMap;
 	}
+	
 	public HashMap<String,String> getContactWithContactId(String contactId) {
 		HashMap<String ,String> resultMap = new   HashMap<String,String> ();
 		try{
@@ -109,6 +113,38 @@ public class ContactDAO {
 	public HashMap<String, String> createContactWithOauth(String firstName,String lastName, String vendor) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public HashMap<String, String> newRegistration(String email, String password) {
+		HashMap<String ,String> resultMap = new   HashMap<String,String> ();
+		try{
+			UUID key = UUID.randomUUID();
+
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+
+		    
+	        Query getContactJDO= pm.newQuery(ContactJDO.class, " userEmail == '" +email+ "' && userPassword== '"+password+"'");
+	 	    System.out.println("query " + getContactJDO);
+	 	    List<ContactJDO> listContactJDO = (List<ContactJDO>) getContactJDO .execute();
+	 	    if(listContactJDO.size() > 0){
+	 	    	resultMap.put("Email", listContactJDO.get(0).getUserEmail());
+	 	    	resultMap.put("FirstName", listContactJDO.get(0).getUserFirstName());
+	 	    	resultMap.put("LastName", listContactJDO.get(0).getUserLastName());
+	 	    	resultMap.put("ContactId", listContactJDO.get(0).getUserId());
+	 	    }
+	 	    else{
+	 	    	ContactJDO contact = new ContactJDO();
+	 	    	contact.setUserEmail(email);
+	 	    	contact.setUserPassword(password);
+	 	    	contact.setUserId(key.toString());
+	 	    	pm.makePersistent(contact);
+	 	    	resultMap.put("response", "contact Created succefully");
+	 	    }
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultMap;
 	}
 
 

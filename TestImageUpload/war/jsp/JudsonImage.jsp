@@ -9,13 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>JUDSON IMAGE</title>
 
-<link rel="stylesheet" type="text/css" href="/css/JudsonReset.css" />
-<link rel="stylesheet" type="text/css" href="/css/Judsonstyle.css" />
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/css/Judson.css" />
 
-<script type="text/javascript" src="/js/actions.js"></script>
-<script type="text/javascript"src="/js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript"src="/js/BatchImage.js"></script>
+<script type="text/javascript"src="/js/jquery-1.8.1.min.js"></script>
+
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/me.js"></script>
@@ -25,7 +26,7 @@
 	media="all" />
 	
 <script type="text/javascript" src="/js/datepicker.js"></script>
-<link rel="stylesheet" media="screen" type="text/css" href="/css/mainStructure.css" />
+<link rel="stylesheet" media="screen" type="text/css" href="/css/layout.css" />
 <link rel="stylesheet" href="/css/datepicker.css" type="text/css" />
 
 </head>
@@ -41,6 +42,17 @@
 			</p>
 		</div>
 		<div id="login_details">
+		<ul class="right_nav_holder">
+	            	<!-- <li class="first">Help</li> 
+					<li id="userName">Welcome, </li> 
+					<li id="account_menu"><a href="#">My Account</a>
+						<ul>
+							<li id="my_details" onclick="openwin();"><a href="#">My Details &raquo;<span>Username/password</span></a></li>
+						<li id="change_password"><a href="/home/changePassword.req">Change Password &raquo;<span></span></a></li> onclick="resetPassword()"
+							<li id="sign_out"><a id="sid" onmouseout="fnout('sid')" onmouseover="fnover('sid')" onclick="autoClockOutBeforeSignOut();">Sign Out &raquo;<span>See you soon!</span></a></li>
+						</ul>
+					</li> -->
+				</ul>
 			
 		</div>
 		<!-- login_details -->
@@ -64,7 +76,7 @@
 			<div class="inner_content admin_content bsc_rpting_cont">
 				<ul class="admin_left_panel">
 					<li class="selected"><a href="javascript:void(0)"> Judson pending Images</a></li>
-					<li class=""><a href="jsp/JudsonUpload.jsp"> Judson Upload </a></li>
+					<li class=""><a href="/jsp/JudsonUpload.jsp"> Judson Upload </a></li>
 				
 				</ul>
 					<div id="content_wrapper1" class="clockedin_content">
@@ -87,7 +99,8 @@
 					 	
 				
 					
-				<div class="clockedin_table">
+				<div class="clockedin_table" id="scrollWrapper">
+				
 					<table cellpadding="1" cellspacing="1" border="1" width="100%">
 					<thead>
 						<tr>
@@ -95,7 +108,7 @@
 							<th width="25%">Image Description</th>
 							<th width="25%">image type</th>
 							<th width="25%">Status</th>
-												
+									
 						</tr>
 					</thead>
 					
@@ -114,9 +127,10 @@
 					<div id="totalHoursWorked"></div>
 					<br/>
 					</div>
-					  <div id="tid_paginate" class="dataTables_paginate paging_full_numbers">
-							<input type="submit" id="tid_next" class="next paginate_button paginate_button" onmouseover="fnover("tid_next")" onmouseout="fnout("tid_next")" style="cursor: pointer; color: rgb(0, 0, 0);" value="Next" onclick='getNext()'/>
-					</div>
+					  <!-- <div id="tid_paginate" class="dataTables_paginate paging_full_numbers">
+							<input type="button" onclick='getPreviousVal()'value="Prev"/>
+							<input type="button" onclick='showNextEightxxNumber()' value="Next"/>
+					</div> -->
 				
 					<!--- table_body --->
 				</div>
@@ -135,8 +149,6 @@
 			</div>
 				
 	<iframe src="" style="display: none" id="reportIframe"></iframe>
-							
-	</div>
 	
 
 </body>

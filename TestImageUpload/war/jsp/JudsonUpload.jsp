@@ -12,8 +12,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Image Description</title>
-		<link rel="stylesheet" type="text/css" href="/css/JudsonReset.css" />
-		<link rel="stylesheet" type="text/css" href="/css/Judsonstyle.css" />
+		<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="/css/Judson.css" />
 		<script type="text/javascript"src="/js/BatchImage.js"></script>
 		 
@@ -23,7 +23,7 @@
 
 		<!--- Date Picker --->
 		<script type="text/javascript" src="/js/datepicker.js"></script>
-		<link rel="stylesheet" media="screen" type="text/css" href="/css/mainStructure.css" />
+		<link rel="stylesheet" media="screen" type="text/css" href="/css/layout.css" />
 		<link rel="stylesheet" href="/css/datepicker.css" type="text/css" />
 		
 		<script type="text/javascript">
@@ -62,11 +62,19 @@
 				$('#message').html("<B>Please wait while we process your request....</B>");
 				$('#message').fadeOut(5000);
 				
+				if(imageIdhere==""){
+					$('#message').show();
+					$('#message').html("<B>you have not seleted any image here....</B>");
+					$('#message').fadeOut(5000);
+					return;
+					
+				}
 					$.ajax({type: 'POST', url: '/api/ImageUpload/updateStatus/v_0'  ,data:"imageIdhere="+imageIdhere, success: function(data){
 						$('#message').show();
 						$('#message').html("<B>Updated Successfully</B>");
 						
 						$('#message').fadeOut(2000);
+						
 				   			
 					}
 					});
@@ -112,7 +120,7 @@
 				<div class="inner_content admin_content">
 					<ul class="admin_left_panel">
 					
-                    <li class=""><a href="http://localhost:8888/">Judson pending Images</a></li>
+                    <li class=""><a href="/jsp/JudsonImage.jsp">Judson pending Images</a></li>
                     <li class="selected"><a href="">JudsonUpload </a></li>  
                   
                     

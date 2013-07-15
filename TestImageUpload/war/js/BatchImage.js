@@ -1,4 +1,12 @@
 var batchImageList = null;
+var viewListofNumber = [] ;
+var completeListNumber = [];
+var currentviewList =[];
+var searchView =[];
+
+var prevFlag = false ;
+var nextFlag = false;
+
 
 
 
@@ -285,9 +293,14 @@ function getPendingImageForAdmim(){
 						
 						var newTr = document.createElement("tr");
 						newTr.setAttribute('onclick','viewImageDetail("'+batchImageList.imageId+'")');
+						newTr.setAttribute('onmouseover','changecolour("'+batchImageList.imageId+'")');
+						newTr.setAttribute('onmouseout','againchange("'+batchImageList.imageId+'")');
+						
+
+						newTr.setAttribute('onmouseover','');
 						
 						var title = document.createElement("td");
-						$(title).html('<b>'+batchImageList.imageTitle+'</b>');
+						$(title).html('<b>'+batchImageList.title+'</b>');
 						var imageDescription = document.createElement("td");
 						$(imageDescription).html('<b>'+batchImageList.imageDescription+'</b>');
 						
@@ -313,8 +326,13 @@ function getPendingImageForAdmim(){
 	}
 	
 	
+
+	
+	
+	
 	function viewImageDetail(batchImageid){
-		//alert(batchImageid);
+		
+		//alert(innercontent.imageId);
 	 var imageTitle= batchImageList[batchImageid].title;
 	 var imageDescription= batchImageList[batchImageid].imageDescription;
 
@@ -323,7 +341,14 @@ function getPendingImageForAdmim(){
 
 	}
 	
-	
+	function changecolour(id){
+		$('#'+id).css("background-color","blue");
+
+		
+	}
+	function againchange(id){
+		$('#'+id).css("background-color","transparent");
+	}
 	
 	
 	

@@ -1,0 +1,142 @@
+#widgetField a 	{
+	display: block;
+/*	position: absolute; */
+	width: 26px;
+	height: 26px;
+/*	top: 0;
+	right: 0;
+	text-decoration: none;
+	text-indent: -3000px;*/
+	float:left;
+	border:0px;
+	position:relative;
+	top:2px;	
+	margin-left:-5px;
+	background:none;
+}
+/*#widgetField span	{
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
+	position: absolute;
+	top: 0;
+	height: 26px;
+	line-height: 26px;
+	left: 5px;
+	width: 250px;
+	text-align: center;
+} */
+
+.calendar_wrapper {
+	position:absolute;
+	top:33px;
+	margin-right:446px;
+	right:0px;
+}
+#widgetCalendar {
+	position: absolute;
+	top: 53px;
+	left: 0px;
+	height: 0px;
+	overflow: hidden;
+	width: 410px;
+	background: #333;
+	z-index:3000;
+/*	 filter:alpha(opacity=95);-moz-opacity:.95;opacity:.95; */
+}
+#widgetCalendar .datepicker {
+	position: absolute;
+	bottom: 0;
+	top: auto;
+}
+
+#widgetCalendar thead th {
+	border:0px;
+	background:none;
+	text-align:center;
+}
+
+.datepickerViewDays th.datepickerMonth {
+	text-align:center;
+}
+
+#widgetCalendar .datepickerContainer, #widgetCalendar .datepickerContainer thead th,  #widgetCalendar .datepickerContainer thead tr,
+#widgetCalendar .datepickerBorderT,
+#widgetCalendar .datepickerBorderB,
+#widgetCalendar .datepickerBorderL,
+#widgetCalendar .datepickerBorderR,
+#widgetCalendar .datepickerBorderTL,
+#widgetCalendar .datepickerBorderTR,
+#widgetCalendar .datepickerBorderBL,
+#widgetCalendar .datepickerBorderBR {
+	background: transparent !important;
+}
+
+.hdate {
+	position: absolute;
+	height: 155px;
+	overflow: hidden;
+	width: 210px;
+	background: #333;
+	z-index:3000;
+	margin:0px 0px 0px;
+/*	filter:alpha(opacity=95);-moz-opacity:.95;opacity:.95; */
+display:none;
+}
+
+.hdate .datepicker {
+	position: absolute;
+	bottom: 0;
+	top: auto;
+}
+
+.hdate thead th, table#all_tasks td .hdate thead th{
+	border:0px;
+	background:none;
+	text-align:center;
+}
+
+.hdate table, .hdate table tr td, table#all_tasks td .hdate table tr td, #widgetCalendar table tr td,  {
+	margin:0px;
+	padding:0px;
+	background:none;
+	border:0px;	
+}
+
+.hdate .datepickerContainer, .hdate .datepickerContainer thead th, .hdate .datepickerContainer thead tr,
+.hdate .datepickerBorderT,
+.hdate .datepickerBorderB,
+.hdate .datepickerBorderL,
+.hdate .datepickerBorderR,
+.hdate .datepickerBorderTL,
+.hdate .datepickerBorderTR,
+.hdate .datepickerBorderBL,
+.hdate .datepickerBorderBR {
+	background: transparent !important;
+}
+
+#widgetCalendar .datepicker a:hover, .hdate .datepicker a:hover{
+	color: #0071B9;
+	background:none;
+	cursor:pointer;
+}
+
+.datepickerDays tr td, .datepickerContainer tr td {
+	background:none;
+	margin:0px;
+	padding:0px;
+}
+/*
+#colorSelector {
+	position: relative;
+	width: 36px;
+	height: 36px;
+}
+#colorSelector div {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 30px;
+	height: 30px;
+	background: url(../images/select.png) center;
+}*/

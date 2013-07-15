@@ -1348,3 +1348,9 @@ code.red_clock { background-position: 0px -85px;}
     margin-left: 55px;
     width: 300px;    
 }
+
+div#scrollWrapper {
+    height: 513px;
+    overflow: scroll;
+    width: 1101px;
+}

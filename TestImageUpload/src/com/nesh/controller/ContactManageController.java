@@ -47,13 +47,40 @@ public class ContactManageController {
 		 return  resultMap;
 	
 	}
-	@RequestMapping("/getContact/v_0")
-	public @ResponseBody HashMap<String, String> getContact(HttpServletRequest request ,HttpServletResponse response){
+	
+	@RequestMapping("/newRegistration/v_0")
+	public @ResponseBody HashMap<String, String> newRegistration(HttpServletRequest request ,HttpServletResponse response){
 		
-		HashMap<String,String > resultMap = new HashMap<String,String>();
+		HashMap<String, String> resultMap = new HashMap<String,String>();
+
+		 try{
+			 resultMap =  contactHelper.newRegistration(request,response);
+		 } catch (Exception e) {
+			 StringWriter sw = new StringWriter();
+			 PrintWriter pw = new PrintWriter(sw);
+			 e.printStackTrace(pw);
+			 mLogger.info(sw.toString());
+		 }
+		 return  resultMap;
+	
+	}
+	
+	@RequestMapping("/getContact/v_0")
+	public  HashMap<String, Object> getContact(HttpServletRequest request ,HttpServletResponse response){
+		
+		HashMap<String,Object > resultMap = new HashMap<String,Object>();
+		String responseMessage = "";
 
 		 try{
 			 resultMap =  contactHelper.getContact(request,response);
+			 responseMessage = (String) resultMap.get("Response");
+			 
+			if((Boolean) resultMap.get("flag")){
+				response.sendRedirect("/jsp/JudsonImage.jsp");
+			}
+			else{
+				response.sendRedirect("/login.jsp?responseMessage="+responseMessage);
+			}
 		 } catch (Exception e) {
 			 StringWriter sw = new StringWriter();
 			 PrintWriter pw = new PrintWriter(sw);

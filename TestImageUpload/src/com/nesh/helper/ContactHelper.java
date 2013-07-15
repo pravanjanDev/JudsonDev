@@ -49,14 +49,16 @@ public class ContactHelper {
 		return resultMap;
 	}
 
-	public HashMap<String,String> getContact(HttpServletRequest request,HttpServletResponse response) {
+	public HashMap<String,Object> getContact(HttpServletRequest request,HttpServletResponse response) {
 		
-		String email = request.getParameter("email");
+		String email = request.getParameter("email").trim();
 		
+		String password = request.getParameter("password").trim();
+
 		ContactDAO contactDAO = new ContactDAO();
-		HashMap<String,String > resultMap = new HashMap<String,String>();
+		HashMap<String,Object> resultMap = new HashMap<String,Object>();
 		try{
-			resultMap =contactDAO.getContact(email);
+			resultMap =contactDAO.getContact(email,password);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -72,6 +74,23 @@ public class ContactHelper {
 		HashMap<String,String > resultMap = new HashMap<String,String>();
 		try{
 			resultMap =contactDAO.getContactWithContactId(contactId);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+
+	public HashMap<String, String> newRegistration(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		String email = request.getParameter("email");
+		
+		String password = request.getParameter("password");
+		ContactDAO contactDAO = new ContactDAO();
+		HashMap<String,String > resultMap = new HashMap<String,String>();
+		try{
+			resultMap =contactDAO.newRegistration(email,password);
 		}
 		catch(Exception e){
 			e.printStackTrace();
