@@ -1,0 +1,89 @@
+@charset "UTF-8";
+ul.dropdown {
+    float: right;
+    font: 14px "segoe UI","Lucida Grande",sans-serif;
+    text-transform: uppercase;
+}
+ul.dropdown li {
+    color: #FFFFFF;
+    padding: 7px 12px;
+}
+ul.dropdown a:link, ul.dropdown a:visited {
+    color: #464646;
+    font-family: segoe ui;
+    font-size: 16px;
+    text-decoration: none;
+}
+ul.dropdown a:hover {
+    color: #464646;
+    font-family: segoe ui;
+    font-size: 16px;
+    text-decoration: underline;
+}
+ul.dropdown a:active {
+    color: #42823E;
+    font-family: segoe ui;
+    font-size: 16px;
+}
+ul.dropdown ul {
+    background: url("/resources/images/dropdown_pane.png") no-repeat scroll 0 100% transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: normal;
+    margin-left: -6px;
+    padding-bottom: 9px;
+    width: 170px;
+}
+ul.dropdown ul li {
+    background-color: transparent;
+    color: #000000;
+}
+ul.dropdown ul li.hover, ul.dropdown ul li:hover {
+    background-color: transparent;
+}
+ul.dropdown ul li.empty {
+    font-weight: bold;
+    padding: 12px 12px 7px !important;
+}
+ul.dropdown ul a:link, ul.dropdown ul a:visited {
+    color: #000000;
+}
+ul.dropdown ul a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+ul.dropdown ul a:active {
+    color: #000000;
+}
+ul.dropdown ul ul {
+    display: none;
+}
+ul.dropdown .dir {
+    background-image: none;
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    padding-right: 12px;
+}
+ul.dropdown-horizontal ul .dir {
+    background-image: url("/resources/images/nav-arrow-right.png");
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    padding-right: 15px;
+}
+ul.dropdown-vertical .dir {
+    background-image: url("/resources/images/nav-arrow-right.png");
+}
+ul.dropdown-vertical-rtl .dir {
+    background-image: url("/resources/images/nav-arrow-left.png");
+    background-position: 0 50%;
+    padding-right: 15px;
+}
+.horizontal-centering {
+    float: right;
+    height: 18px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    position: relative;
+    text-align: center;
+    width: 648px;
+}
